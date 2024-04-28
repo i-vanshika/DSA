@@ -50,7 +50,7 @@ Node* removesHead(Node* head){
 
 /* REMOVING TAIL FROM A LL */
 Node* removesTail(Node* head){
-    if(head == NULL || head->next == NULL) return NULL;
+    if(head == NULL || head->next == NULL) return NULL;  //edge case
     Node* temp = head;  // always store a copy of head
     while(temp->next->next != NULL){
         temp = temp->next;
@@ -63,20 +63,43 @@ Node* removesTail(Node* head){
 
 /* DELETE Kth ELEMENT FROM A LL */
 Node* removeK(Node* head, int k){
-    if(head == NULL ) return head;
-    if(k==1){
+    if (head == NULL) return NULL;
+    if(k ==1 ){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return head;
+    }
+    int count = 0;
+    Node* temp = head;
+    Node* prev = nullptr;
+    while(temp != NULL){
+        count ++;
+    if(count == k){
+        prev->next = prev->next->next;
+        free(temp);
+        break;
+    }
+    prev = temp;
+    temp = temp->next;
+    }
+    return head;
+}
+
+
+/* REMOVE ELEMENT FROM A LL */
+Node* removeEle(Node* head, int ele){
+    if(head == NULL) return NULL;
+    if(head->data == ele){
         Node* temp = head;
         head = head->next;
         free(temp);
         return head;
     }
-
-    int count = 0;
+    Node* prev = nullptr;
     Node* temp = head;
-    Node* prev = NULL;
     while(temp != NULL){
-        count ++;
-        if(count == k){
+        if(temp->data == ele){
             prev->next = prev->next->next;
             free(temp);
             break;
@@ -86,7 +109,14 @@ Node* removeK(Node* head, int k){
     }
     return head;
 }
-/* INSERTION */
+
+/* INSERTION OF HEAD IN A LL */
+Node* insertHead(Node* head, int val){
+    //Node* temp = new Node(val, head);
+    //return temp;
+    return new Node(val,head);
+
+}
 
 int main(){
     vector<int>arr = {12,5,8,7};
@@ -94,5 +124,8 @@ int main(){
     //head = removesHead(head); 
     //head = removesTail(head);
     //head = removeK(head, 3);
+    //head = removeEle(head, 8); 
+    head = insertHead(head,100);
+
     print(head);
 }
