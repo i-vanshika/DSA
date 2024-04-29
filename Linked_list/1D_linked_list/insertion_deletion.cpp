@@ -118,6 +118,20 @@ Node* insertHead(Node* head, int val){
 
 }
 
+/* INSERTION OF TAIL IN A LL */
+Node* insertTail(Node* head, int val){
+    if (head == NULL){
+        return new Node(val);
+    }
+    Node* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    Node* new_node = new Node(val);
+    temp->next = new_node;
+    return head;
+}
+
 int main(){
     vector<int>arr = {12,5,8,7};
     Node* head = convertArr2LL(arr);
@@ -125,7 +139,8 @@ int main(){
     //head = removesTail(head);
     //head = removeK(head, 3);
     //head = removeEle(head, 8); 
-    head = insertHead(head,100);
+    //head = insertHead(head,100);
+    head = insertTail(head,100);
 
     print(head);
 }
