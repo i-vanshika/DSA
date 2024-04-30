@@ -132,6 +132,20 @@ Node* insertTail(Node* head, int val){
     return head;
 }
 
+
+Node* insertPosition(Node* head, int k, int ele){
+    if(head == NULL){
+        if(k==1){
+            return new Node(ele);
+        }
+        else{
+            return head;
+        }
+    }
+    
+
+}
+
 int main(){
     vector<int>arr = {12,5,8,7};
     Node* head = convertArr2LL(arr);
