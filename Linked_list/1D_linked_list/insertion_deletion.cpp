@@ -154,7 +154,7 @@ int main(){
     //head = removeK(head, 3);
     //head = removeEle(head, 8); 
     //head = insertHead(head,100);
-    head = insertTail(head,100);
+    //head = insertTail(head,100);
 
     print(head);
 }
