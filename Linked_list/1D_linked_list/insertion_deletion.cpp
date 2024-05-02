@@ -133,13 +133,21 @@ Node* insertTail(Node* head, int val){
 }
 
 
-Node* insertPosition(Node* head, int k, int ele){
+Node* insertPosition(Node* head, int ele, int k){
     if(head == NULL){
         if(k==1){
             return new Node(ele);
         }
         else{
             return head;
+        }
+    }
+    int count = 0;
+    Node* temp = head;
+    while(temp != NULL){
+        count++;
+        if(count == (k-1)){
+            
         }
     }
     
