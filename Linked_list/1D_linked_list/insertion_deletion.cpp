@@ -150,9 +150,22 @@ Node* insertPosition(Node* head, int ele, int k){
             
         }
     }
-    
+}
+
+/* REVISION */
+bool check_present(Node*head, int ele){
+    Node* temp = head;
+    while(temp!=NULL){
+        if(temp->data == ele){
+            return 1;
+        }
+        temp = temp->next;
+    }
+    return 0;
 
 }
+
+
 
 int main(){
     vector<int>arr = {12,5,8,7};
