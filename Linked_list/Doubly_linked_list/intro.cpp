@@ -44,9 +44,42 @@ Node* convertArr2DLL(vector<int>& arr){
      return head;
 }
 
+/* DELETE HEAD IN A DLL */
+Node* DeleteHead(Node* head){
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
+    Node* prev = head;
+    head = head->next;
+
+    head->back = nullptr;
+    prev->next = nullptr;
+
+    delete prev;
+    return head;
+}
+
+/* DELETE TAIL IN A DLL */
+Node* DeleteTail(Node* head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    Node* tail = head;
+    while(tail->next != NULL){
+        tail = tail->next;
+    }
+    Node* newTail = tail->back;
+    newTail->next = nullptr;
+    tail->back = nullptr;
+    delete tail;
+    return head;
+}
+
 int main(){
     vector<int>arr = {12, 5, 8, 7};
     Node* head = convertArr2DLL(arr);
+    //head = DeleteHead(head);
+    head = DeleteTail(head);
     print(head);
 
 
