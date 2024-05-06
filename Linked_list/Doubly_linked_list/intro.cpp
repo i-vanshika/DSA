@@ -75,11 +75,73 @@ Node* DeleteTail(Node* head){
     return head;
 }
 
+/* REMOVE Kth ELEMENT IN DLL */
+Node* RemoveKthElement(Node* head, int k){
+    if(head == NULL){
+        return NULL;
+    }
+    Node* kNode = head;
+    int count = 0;
+    while(kNode != NULL){
+        count ++;
+        if(count == k){
+            break;
+        }
+        kNode = kNode->next;
+    }
+    Node* prev = kNode->back;
+    Node* front = kNode->next;
+
+    //edge cases
+    if(prev == NULL && front == NULL){
+        return head;
+    }
+    else if(prev == NULL){
+    return DeleteHead(head);
+    }
+    else if(front ==NULL){
+        return DeleteTail(head);
+    }
+
+    prev->next = front;
+    front->back = prev;
+
+    kNode->next = nullptr;
+    kNode->back = nullptr;
+    delete kNode;
+    return head;
+}
+
+/* REMOVE NODE IN A DLL */
+void DeleteNode(Node* temp){
+    // this ques is not asking you to delete head as more and more conditions would be required.
+
+    Node* prev = temp->back;
+    Node* front = temp->next;
+
+    if(front == NULL){
+        prev->next = nullptr;
+        front->back = nullptr;
+        free(temp);
+        return ;
+    }
+    prev->next = front;
+    front->back = prev;
+
+    temp->next = nullptr;
+    temp->back = nullptr;
+    free(temp);
+}
+
+/* INSERTING */
+
 int main(){
     vector<int>arr = {12, 5, 8, 7};
     Node* head = convertArr2DLL(arr);
     //head = DeleteHead(head);
-    head = DeleteTail(head);
+    //head = DeleteTail(head);
+    //head = RemoveKthElement(head ,3);
+    DeleteNode(head->next->next);
     print(head);
 
 
