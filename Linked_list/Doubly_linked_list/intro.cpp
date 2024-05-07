@@ -133,7 +133,17 @@ void DeleteNode(Node* temp){
     free(temp);
 }
 
-/* INSERTING */
+/* INSERTING NODE AT HEAD */
+Node* insertHead(Node* head, int val){
+    Node* temp = new Node(val, head, nullptr);
+    return temp;
+
+}
+
+/* INSERTING NODE AT TAIL */
+Node* insertTail(Node* head, int val){
+    
+}
 
 int main(){
     vector<int>arr = {12, 5, 8, 7};
@@ -141,7 +151,8 @@ int main(){
     //head = DeleteHead(head);
     //head = DeleteTail(head);
     //head = RemoveKthElement(head ,3);
-    DeleteNode(head->next->next);
+    //DeleteNode(head->next->next);
+    head = insertHead(head, 600);
     print(head);
 
 
