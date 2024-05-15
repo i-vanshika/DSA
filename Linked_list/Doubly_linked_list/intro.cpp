@@ -129,20 +129,32 @@ void DeleteNode(Node* temp){
     front->back = prev;
 
     temp->next = nullptr;
-    temp->back = nullptr;
+    temp->back = nullptr;  
     free(temp);
 }
 
 /* INSERTING NODE AT HEAD */
-Node* insertHead(Node* head, int val){
-    Node* temp = new Node(val, head, nullptr);
-    return temp;
+Node* insertBeforeHead(Node* head, int val){
+    Node* newHead = new Node(val, head, nullptr);
+    head->back = newHead;
+    return newHead;
 
 }
 
-/* INSERTING NODE AT TAIL */
-Node* insertTail(Node* head, int val){
-    
+/* INSERTING NODE AT TAIL*/
+Node* insertBeforeTail(Node* head, int val){
+    if (head == nullptr) { // Case: empty list
+        return new Node(val);
+    }
+    Node* tail = head;
+    while(tail != nullptr){
+        tail = tail->next;
+    }
+    Node* prev = tail->back;
+    Node* newNode = new Node(val, tail, prev);
+    prev->next = newNode;
+    tail->back = newNode;
+    return head;
 }
 
 int main(){
@@ -152,7 +164,8 @@ int main(){
     //head = DeleteTail(head);
     //head = RemoveKthElement(head ,3);
     //DeleteNode(head->next->next);
-    head = insertHead(head, 600);
+    //head = insertBeforeHead(head, 600);
+    head = insertBeforeTail(head, 600);
     print(head);
 
 
