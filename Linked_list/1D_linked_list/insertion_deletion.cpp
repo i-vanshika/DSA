@@ -132,40 +132,52 @@ Node* insertTail(Node* head, int val){
     return head;
 }
 
-
+/* INSERTING AT Kth POSITION */
 Node* insertPosition(Node* head, int ele, int k){
-    if(head == NULL){
-        if(k==1){
-            return new Node(ele);
-        }
-        else{
-            return head;
-        }
+    if(head==NULL){
+        if(k==1)  return new Node(ele);
+        else return NULL;
     }
-    int count = 0;
-    Node* temp = head;
-    while(temp != NULL){
-        count++;
-        if(count == (k-1)){
-            
-        }
+    if(k==1){
+        Node* temp = new Node(ele,head);
+        return temp;
     }
-}
-
-/* REVISION */
-bool check_present(Node*head, int ele){
+    int cnt =0;
     Node* temp = head;
     while(temp!=NULL){
-        if(temp->data == ele){
-            return 1;
+        cnt++;
+        if(cnt == k-1){
+            Node* x = new Node(ele);
+            x->next = temp->next;
+            temp->next = x;
+            break;
         }
         temp = temp->next;
     }
-    return 0;
-
+    return head;
 }
 
+/* INSERTING ELEMENT BEFORE THE VALUE X */
+Node* insertBeforeValue(Node* head, int ele, int val_x){
+    //edge case
+    if(head == NULL) return NULL; // LL is empty 
+    if(head->data == val_x){
+        return new Node(ele);
+    }
+    Node* temp = head;
+    while( temp->next != NULL){
+        if(temp->next->data == val_x){
+            Node* newNode = new Node(ele);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            break;
 
+        }
+        temp = temp->next;
+    }
+    return head;
+}
+     
 
 int main(){
     vector<int>arr = {12,5,8,7};
@@ -176,6 +188,8 @@ int main(){
     //head = removeEle(head, 8); 
     //head = insertHead(head,100);
     //head = insertTail(head,100);
+    //head = insertPosition(head, 10,3);
+    head = insertBeforeValue(head, 100,8);
 
     print(head);
 }
