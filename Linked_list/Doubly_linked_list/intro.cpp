@@ -141,13 +141,13 @@ Node* insertBeforeHead(Node* head, int val){
 
 }
 
-/* INSERTING NODE AT TAIL*/
+/* INSERTING BEFORE  AT TAIL*/
 Node* insertBeforeTail(Node* head, int val){
-    if (head == nullptr) { // Case: empty list
-        return new Node(val);
+    if (head->next == NULL) { 
+        return insertBeforeHead(head,val);
     }
     Node* tail = head;
-    while(tail != nullptr){
+    while(tail->next != NULL){
         tail = tail->next;
     }
     Node* prev = tail->back;
@@ -155,6 +155,37 @@ Node* insertBeforeTail(Node* head, int val){
     prev->next = newNode;
     tail->back = newNode;
     return head;
+} 
+
+/* INSERTING BEFORE Kth ELEMENT */
+Node* insertBeforeKthElement(Node* head, int k, int val){
+    if(k==1)  return insertBeforeHead(head,val);
+
+    Node* temp = head;
+    int cnt =0;
+    while(temp != NULL){
+        cnt ++;
+        if(cnt == k){
+            break;
+        }
+        temp = temp->next;
+    }
+    Node* prev = temp->back;
+    Node* newNode = new Node(val,temp, prev);
+    prev->next = newNode;
+    temp->back = newNode;
+    return head;
+
+}
+
+/* INSERTING BEFORE A GIVEN NODE */
+// it is guranteed that given node!= head, as we are not suppose to change the head
+void insertBeforeNode(Node* node, int val){
+    Node* prev = node->back;
+    Node* newNode = new Node(val, node, prev);
+    prev->next = newNode;
+    node->back = newNode;
+ 
 }
 
 int main(){
@@ -165,9 +196,10 @@ int main(){
     //head = RemoveKthElement(head ,3);
     //DeleteNode(head->next->next);
     //head = insertBeforeHead(head, 600);
-    head = insertBeforeTail(head, 600);
+    //head = insertBeforeTail(head, 600);
+    //head = insertBeforeKthElement(head, 1,800);
+    insertBeforeNode(head->next->next, 100);
     print(head);
-
 
     return 0;
 }
